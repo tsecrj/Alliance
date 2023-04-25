@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+from collections import defaultdict
+
+first = defaultdict(list)
+
+def findFirst(key,gram):
+    for i in gram[key]:
+        if 'A'<=i[0] and i[0]<='Z':         #Checks if first element is Non-terminal
+            if i[0] in first:               #Checks if it first value is already available than directly add its all value
+                first[key].extend(first[i[0]])
+            else:                            #If not than find its first and extend here
+                findFirst(i[0],gram)
+                first[key].extend(first[i[0]])
+
+        elif i[0]=='#':                     #Checks if element is epsilon which is denoted by #
+            first[key].append(i[0])
+            
+        else:                               #If none of above than it must be terminal
+            first[key].append(i[0])
+            
+
+def main():
+    gram = {
+        'S' : ["AB","cd"],
+        'A' : ["C","a"],
+        'B' : ["b"],
+        'C' : ["c","#"]
+    }
+    print("Original Grammer:")
+    for i,j in gram.items():
+        print(f"{i}->{j}")
+    for i in gram:
+        if i not in first:
+            findFirst(i,gram)
+    
+    print("First of Above grammer")
+    for i,j in first.items():
+        print(f"{i}->{j}")
+
+main()
+    </pre>
+</body>
+</html>
