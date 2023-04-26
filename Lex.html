@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+import sys
+keyword = ['break','case','char','const','countinue','default','do','int','else','String','extern','float','for','goto','if','long','register','return','short','signed','sizeof','static','switch','print','union','unsigned','void','volatile','while']
+built_in_functions = ['clrscr()','printf()','scanf()','getch()','main()']
+operators = ['+','-','*','/','%','==','!=','>','<','>=','<=','&&','||','!','&','|','^','~','>>','<<','=','+=','-=','*=']
+specialsymbol = ['@','#','$','_','!']
+separator = [',',':',';','\n','\t','{','}','(',')','[',']']
+key, fun, ope, sep, spe, num, ide = [],[],[],[],[],[],[]
+
+print("Enter code:")
+msg = sys.stdin.readline()
+
+content=msg.split()
+for ch in content:
+    if ch in keyword:
+        key.append(ch)
+        
+    elif ch in built_in_functions:
+        fun.append(ch)
+        
+    elif ch in operators:
+        ope.append(ch)
+    
+    elif ch in separator:
+        sep.append(ch)
+        
+    elif ch in specialsymbol:
+        spe.append(ch)
+        
+    elif ch.replace('.', '', 1).isdigit():
+        num.append(ch)
+    
+    else:
+        ide.append(ch)
+    
+print("Keywords are: ", str(key)[1:-1])
+print("Built-in functions are: ", str(fun)[1:-1])
+print("Operators are: ", str(ope)[1:-1])
+print("Special Symbols are: ", str(spe)[1:-1])
+print("Separators are: ", str(sep)[1:-1])
+print("Numbers are: ", str(num)[1:-1])
+print("Identifiers are: ", str(ide)[1:-1])
+    </pre>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+def eliminate_left_factoring(grammar):    
+    newg = {}
+    for ter in grammar:
+        productions = grammar[ter]
+        common_prefixes = {}
+        new_productions = []
+        for p in productions:
+            if p[0] not in common_prefixes:
+                common_prefixes[p[0]] = []
+            common_prefixes[p[0]].append(p)
+        for prefix in common_prefixes:
+            if len(common_prefixes[prefix]) > 1:
+                new_symbol = ter + "_"
+                newg[ter] = [prefix + new_symbol]
+                #new_productions.append(prefix[1:])
+                for p in common_prefixes[prefix]:
+                    if p[1:]:
+                        new_productions.append(p[1:])
+                    else:
+                        new_productions.append("epsilon")
+            else:
+                new_productions.extend(common_prefixes[prefix])
+        newg[new_symbol] = new_productions
+        
+    return newg
+
+grammar = {
+    "S": ["abA", "acA"],
+    "A": ["axy", "ad"],
+    #"B": ["b", "c", "d"]
+}
+
+newg = eliminate_left_factoring(grammar)
+for key,value in newg.items():
+	print(key, ':', value)
+
+#working only if all prog have left factoring required.
+    </pre>
+</body>
+</html>
